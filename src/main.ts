@@ -1,5 +1,4 @@
 import { ErrorMapper } from "utils/ErrorMapper";
-import { RunTasks } from "./tasks/";
 
 export const loop = ErrorMapper.wrapLoop(() => {
   console.log(`Current game tick is ${Game.time}, used CPU: ${Game.cpu.getUsed().toFixed(2)}/${Game.cpu.tickLimit}`);
@@ -10,6 +9,4 @@ export const loop = ErrorMapper.wrapLoop(() => {
       delete Memory.creeps[name];
     }
   }
-
-  RunTasks();
 });
