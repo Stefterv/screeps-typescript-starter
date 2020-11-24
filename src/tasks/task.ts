@@ -5,4 +5,7 @@ export abstract class Task {
   }
   abstract execute(creep: Creep): boolean;
   abstract prepare(room: Room): void;
+
+  // per creep when to revisit the task
+  // per creep does it need to move somewhere?
 }

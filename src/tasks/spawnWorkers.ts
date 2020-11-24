@@ -10,6 +10,7 @@ export class SpawnWorkers extends Task {
   prepare(room: Room): void {
     let creeps = Object.values(Game.creeps);
 
+    // look at the closest source for each spawn and spawn as many creeps as they can support + 2
     if (creeps.length > room.find(FIND_SOURCES).length * 4) return;
 
     for (let spawnName in Game.spawns) {

@@ -1,6 +1,4 @@
 import { ErrorMapper } from "utils/ErrorMapper";
-import { Harvest } from "./harvest";
-import { Upgrade } from "./upgrade";
 import { RunTasks } from "./tasks/";
 
 export const loop = ErrorMapper.wrapLoop(() => {
@@ -13,7 +11,5 @@ export const loop = ErrorMapper.wrapLoop(() => {
     }
   }
 
-  // Harvest();
-  // Upgrade();
   RunTasks();
 });

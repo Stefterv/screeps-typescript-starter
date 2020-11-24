@@ -1,0 +1,6 @@
+docker run --rm -v C:\\Users\\Stef\\Projects\\Screeps\\screeps:/screeps quay.io/ags131/screeps-server yarn add screepsmod-auth
+
+docker exec -it screeps-server npx screeps cli
+
+
+setPassword('Stefterv', 'test')
