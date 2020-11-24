@@ -2,8 +2,16 @@ import { Task } from "./task";
 
 import { HarvestEnergy } from "./HarvestEnergy";
 import { DepositEnergy } from "./DepositEnergy";
+import { UpgradeController } from "./UpgradeController";
+import { Construction } from "./Construction";
 import { SpawnWorkers } from "./SpawnWorkers";
-const tasks: Array<Task> = [new HarvestEnergy(), new DepositEnergy(), new SpawnWorkers()];
+const tasks: Array<Task> = [
+  new HarvestEnergy(),
+  new DepositEnergy(),
+  new Construction(),
+  new UpgradeController(),
+  new SpawnWorkers()
+];
 
 export function RunTasks() {
   // order tasks by importance

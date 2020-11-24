@@ -10,11 +10,11 @@ export class SpawnWorkers extends Task {
   prepare(room: Room): void {
     let creeps = Object.values(Game.creeps);
 
-    if (creeps.length > 5) return;
+    if (creeps.length > room.find(FIND_SOURCES).length * 4) return;
 
     for (let spawnName in Game.spawns) {
       let spawn = Game.spawns[spawnName];
-      if (spawn.isActive()) continue;
+      // if (spawn.isActive()) continue;
       if (spawn.store.energy < 200) continue;
 
       let newName = "Worker" + Game.time;

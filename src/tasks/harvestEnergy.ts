@@ -9,7 +9,9 @@ export class HarvestEnergy extends Task {
   execute(creep: Creep) {
     if (!creep.store.getFreeCapacity()) return true;
 
-    let sources = creep.room.find(FIND_SOURCES);
+    let unsorted = creep.room.find(FIND_SOURCES).map(source => ({ source, distance: creep.pos.getRangeTo(source) }));
+    unsorted.sort((a, b) => a.distance - b.distance);
+    let sources = unsorted.map(sorted => sorted.source).filter(source => source.energy);
     let harvesting = false;
     for (let source of sources) {
       if (creep.harvest(source) == ERR_NOT_IN_RANGE) continue;
