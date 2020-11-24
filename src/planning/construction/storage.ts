@@ -1,1 +1,1 @@
-// create storages around spawns to allow for larger units
+// create storages around energy sources to allow for larger units

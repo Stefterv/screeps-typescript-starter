@@ -5,4 +5,10 @@ export abstract class Task {
 
   abstract get workers(): number;
   abstract get priority(): Array<number>;
+
+  abstract get progress(): Progress;
+}
+
+interface Progress {
+  finishedIn: number;
 }
