@@ -4,5 +4,5 @@ export abstract class Task {
   abstract get targets(): RoomPosition[];
 
   abstract get workers(): number;
-  abstract get priority(): number;
+  abstract get priority(): Array<number>;
 }
