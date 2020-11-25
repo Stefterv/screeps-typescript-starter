@@ -35,7 +35,10 @@ export default class HarvestEnergy extends Task {
           true
         )
         .filter((result) => {
-          return result.type == LOOK_TERRAIN && result.terrain == "plain";
+          return (
+            (result.type == LOOK_TERRAIN && result.terrain == "plain") ||
+            result.type == LOOK_CREEPS
+          );
         }).length;
 
       for (let instance of [...Array(spaces).keys()].map((i) => i + 1)) {

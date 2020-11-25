@@ -11,23 +11,27 @@ export class TaskManager {
     let lazyCreeps = Object.values(Game.creeps);
     let busyCreeps = new Array<Creep>();
 
-    for (let creep of lazyCreeps) {
-      let taskId = creep.memory.task;
-      if (!taskId) continue;
-      let task = unassignedTasks.find((task) => task.id == taskId);
-      if (!task) continue;
-      task.creep = creep;
-      assignedTasks.push(task);
-      busyCreeps.push(creep);
-    }
-
     function updateLists() {
       unassignedTasks = unassignedTasks.filter(
         (item) => !assignedTasks.includes(item)
       );
       lazyCreeps = lazyCreeps.filter((item) => !busyCreeps.includes(item));
     }
-    debugger;
+
+    for (let creep of lazyCreeps) {
+      let taskId = creep.memory.task;
+      if (!taskId) continue;
+      let task = unassignedTasks.find((task) => task.id == taskId);
+      if (!task) {
+        debugger;
+        continue;
+      }
+      task.creep = creep;
+      assignedTasks.push(task);
+      busyCreeps.push(creep);
+      updateLists();
+    }
+
     // per task
     //    find the closest worker and assign them
     for (let task of unassignedTasks) {
@@ -57,6 +61,7 @@ export class TaskManager {
       // check if the creep is already engaged in the task by checking the memory
       if (!task.creep.memory.task) {
         let range = task.creep.pos.getRangeTo(task.target);
+        debugger;
         if (task.range < range) {
           task.creep.moveTo(task.target, {
             visualizePathStyle: { stroke: "#ffaa00" },
@@ -64,6 +69,9 @@ export class TaskManager {
         }
         if (task.range >= range) {
           task.creep.memory.task = task.id;
+          console.log(
+            `${task.creep.name} is starting ${task.id}:${task.instance}`
+          );
         }
       } else {
         if (task.finished(task.creep)) {
