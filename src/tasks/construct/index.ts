@@ -1,4 +1,4 @@
-import { Task, Progress } from "../../classes/task";
+import { Task } from "../../classes/task";
 
 export class Construction extends Task {
   static generate(): Task[] {
@@ -17,9 +17,6 @@ export class Construction extends Task {
     throw new Error("Method not implemented.");
   }
   action(creep: Creep): void {
-    throw new Error("Method not implemented.");
-  }
-  get progress(): Progress {
     throw new Error("Method not implemented.");
   }
 }

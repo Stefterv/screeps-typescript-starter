@@ -2,22 +2,26 @@
 // priority low
 // requested workers 2 / based on the energy needs
 
-import { Task, Progress } from "../../classes/task";
+import { Task } from "../../classes/task";
 export class HarvestEnergy extends Task {
+  source: Source;
+  constructor(target: RoomPosition, source: Source) {
+    super(target);
+    this.source = source;
+  }
   static generate(room: Room): Task[] {
-    // generate a bunch of priority [1] tasks and then a bunch of priority [0] for backup
+    let sources = room.find(FIND_SOURCES);
     return [];
   }
   action(creep: Creep): void {
-    throw new Error("Method not implemented.");
+    creep.harvest(this.source);
   }
   finished(creep: Creep): boolean {
-    throw new Error("Method not implemented.");
+    if (creep.store.getFreeCapacity() == 0) return true;
+    if (this.source.energy == 0) return true;
+    return false;
   }
   candidates(creeps: Creep[]): Creep[] {
-    throw new Error("Method not implemented.");
-  }
-  get progress(): Progress {
-    throw new Error("Method not implemented.");
+    return creeps.filter((creep) => creep.store.getFreeCapacity());
   }
 }

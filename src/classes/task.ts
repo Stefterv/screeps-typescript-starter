@@ -2,7 +2,7 @@
 // Tasks also have a list of targets, the closest creep will change tasks
 export abstract class Task {
   get id() {
-    return this.constructor.name;
+    return `${this.constructor.name}-${this.target.x}-${this.target.y}`;
   }
   target: RoomPosition;
   instance: number = 0;
@@ -18,10 +18,4 @@ export abstract class Task {
 
   abstract finished(creep: Creep): boolean;
   abstract action(creep: Creep): void;
-
-  abstract get progress(): Progress;
-}
-
-export interface Progress {
-  finishedIn: number;
 }

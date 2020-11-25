@@ -49,6 +49,10 @@ export class TaskManager {
       updateLists();
     }
 
+    for (let creep of lazyCreeps) {
+      // repeat the most important tasks for any creeps that are left over
+    }
+
     for (let task of assignedTasks) {
       // check if the creep is already engaged in the task by checking the memory
       // if not, move to the target and check if next tick it will have arrived
