@@ -4,14 +4,9 @@
 
 import { Task, Progress } from "../../classes/task";
 export class HarvestEnergy extends Task {
-  static generate(): Task[] {
+  static generate(room: Room): Task[] {
+    // generate a bunch of priority [1] tasks and then a bunch of priority [0] for backup
     return [];
-  }
-  get workers(): number {
-    throw new Error("Method not implemented.");
-  }
-  get priority(): number[] {
-    throw new Error("Method not implemented.");
   }
   action(creep: Creep): void {
     throw new Error("Method not implemented.");

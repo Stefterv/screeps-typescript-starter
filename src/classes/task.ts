@@ -1,16 +1,17 @@
 // Tasks have a priority and an amount of requested creeps
 // Tasks also have a list of targets, the closest creep will change tasks
 export abstract class Task {
-  get name() {
+  get id() {
     return this.constructor.name;
   }
   target: RoomPosition;
-  workers: number = 0;
-  priority: Array<Number> = [1];
+  instance: number = 0;
+  priority: Array<number> = [1];
+  creep?: Creep;
   constructor(target: RoomPosition) {
     this.target = target;
   }
-  static generate(): Array<Task> {
+  static generate(room: Room): Array<Task> {
     return [];
   }
   abstract candidates(creeps: Array<Creep>): Array<Creep>;
