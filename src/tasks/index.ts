@@ -33,18 +33,20 @@ export class TaskManager {
     // per task
     //    find the closest worker and assign them
     for (let task of unassignedTasks) {
-      updateLists();
-
       let candidates = task.candidates(lazyCreeps);
       candidates.sort((a, b) => {
+        //TODO compare their capabilities
+        //TODO compare their time to get there instead of the distance
         return a.pos.getRangeTo(task.target) - b.pos.getRangeTo(task.target);
       });
-
       if (!candidates.length) continue;
+
       let creep = candidates[0];
       task.creep = creep;
       busyCreeps.push(creep);
       assignedTasks.push(task);
+
+      updateLists();
     }
 
     for (let task of assignedTasks) {
@@ -56,10 +58,6 @@ export class TaskManager {
 
     // save the requested amount of workers to memory so the spawner can spawn more if necessary
   }
-
-  MoveTo() {}
-
-  Execute() {}
 
   Generate(): Task[] {
     let tasks = taskTypes.flatMap((taskType) => {
