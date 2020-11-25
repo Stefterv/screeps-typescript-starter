@@ -2,9 +2,7 @@
 // once a task is started, it is not altered until it is finished
 
 import { Task } from "classes/task";
-import { HarvestEnergy } from "./harvest/energy";
-
-const taskTypes = [HarvestEnergy];
+import { taskTypes } from "./all";
 
 export class TaskManager {
   Assign() {
@@ -29,7 +27,7 @@ export class TaskManager {
       );
       lazyCreeps = lazyCreeps.filter((item) => !busyCreeps.includes(item));
     }
-
+    debugger;
     // per task
     //    find the closest worker and assign them
     for (let task of unassignedTasks) {
@@ -51,10 +49,29 @@ export class TaskManager {
 
     for (let creep of lazyCreeps) {
       // repeat the most important tasks for any creeps that are left over
+      // implement after main loop works
     }
 
     for (let task of assignedTasks) {
+      if (!task.creep) continue;
       // check if the creep is already engaged in the task by checking the memory
+      if (!task.creep.memory.task) {
+        let range = task.creep.pos.getRangeTo(task.target);
+        if (task.range < range) {
+          task.creep.moveTo(task.target, {
+            visualizePathStyle: { stroke: "#ffaa00" },
+          });
+        }
+        if (task.range >= range) {
+          task.creep.memory.task = task.id;
+        }
+      } else {
+        if (task.finished(task.creep)) {
+          delete task.creep.memory.task;
+          return;
+        }
+        task.action(task.creep);
+      }
       // if not, move to the target and check if next tick it will have arrived
       // else
       // execute task

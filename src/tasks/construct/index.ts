@@ -1,6 +1,7 @@
 import { Task } from "../../classes/task";
 
 export class Construction extends Task {
+  readonly range = 1;
   static generate(): Task[] {
     // generate tasks for
     // - roads, storage, towers, rampart

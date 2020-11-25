@@ -2,13 +2,14 @@
 // Tasks also have a list of targets, the closest creep will change tasks
 export abstract class Task {
   get id() {
-    return `${this.constructor.name}-${this.target.x}-${this.target.y}`;
+    return `${this.constructor.name}-${this.target.pos.x}-${this.target.pos.y}`;
   }
-  target: RoomPosition;
+  target: RoomObject;
   instance: number = 0;
   priority: Array<number> = [1];
   creep?: Creep;
-  constructor(target: RoomPosition) {
+  abstract readonly range: number;
+  constructor(target: RoomObject) {
     this.target = target;
   }
   static generate(room: Room): Array<Task> {
